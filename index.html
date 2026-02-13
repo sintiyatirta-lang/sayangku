@@ -2,138 +2,179 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Valentine Untuk Kamu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Vivi 💗</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
 body{
-    margin:0;
-    font-family:'Comic Sans MS', cursive;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    text-align:center;
-    color:white;
-    overflow:hidden;
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ffd6e7,#ffeaf4);
+overflow:hidden;
+text-align:center;
 }
-.container{
-    padding:40px;
+
+/* Sakura */
+.sakura{
+position:fixed;
+top:-10px;
+font-size:18px;
+animation:fall linear infinite;
+pointer-events:none;
 }
-h1{
-    font-size:38px;
-    animation:bounce 2s infinite;
+@keyframes fall{
+0%{transform:translateY(-10px) rotate(0deg);}
+100%{transform:translateY(100vh) rotate(360deg);}
 }
-@keyframes bounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
+
+/* Page */
+.page{
+display:none;
+height:100vh;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+padding:20px;
+animation:fade 1s ease;
 }
+.active{display:flex;}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
 button{
-    padding:15px 25px;
-    font-size:16px;
-    border:none;
-    border-radius:25px;
-    cursor:pointer;
-    margin:10px;
-    transition:0.3s;
+padding:14px 28px;
+margin:10px;
+border:none;
+border-radius:30px;
+background:#ff8fcf;
+color:white;
+font-size:16px;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(255,105,180,0.3);
+transition:0.3s;
 }
-.yes{
-    background:white;
-    color:#ff4f81;
+button:hover{transform:scale(1.05);}
+
+h1{color:#ff4da6;}
+
+.letter{
+background:white;
+padding:30px;
+border-radius:25px;
+box-shadow:0 10px 30px rgba(255,105,180,0.2);
+max-width:520px;
+line-height:1.8;
+color:#555;
 }
-.no{
-    background:#ff4f81;
-    color:white;
-    position:absolute;
+
+/* Confetti */
+.confetti{
+position:fixed;
+font-size:20px;
+animation:conf 3s linear forwards;
 }
-.hidden{
-    display:none;
-    margin-top:20px;
-    font-size:18px;
-}
-#gameArea{
-    margin-top:20px;
-}
-.heart{
-    position:absolute;
-    font-size:25px;
-    cursor:pointer;
+@keyframes conf{
+0%{transform:translateY(0);}
+100%{transform:translateY(100vh);}
 }
 </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Happy Valentine Sayangku ❤️</h1>
-    <p>Walaupun kita LDR... kamu tetap milikku 😜</p>
+<!-- MUSIC -->
+<audio id="bgm" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946b1c1c5d.mp3?filename=romantic-sakura-piano-124477.mp3" type="audio/mp3">
+</audio>
 
-    <h3>Kamu sayang aku nggak? 👀</h3>
-    <button class="yes" onclick="showLove()">Sayang banget ❤️</button>
-    <button class="no" id="noBtn">Nggak 😝</button>
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h1>Vivi 💗<br>Maukah kamu jadi Valentine aku?</h1>
+<button onclick="startMusic();next(2)">Iyaaa 💕</button>
+<button style="position:absolute">Tidak 😝</button>
+</div>
 
-    <div id="loveMsg" class="hidden"></div>
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<h1>Terima kasih sudah sejauh ini bersamaku 💗</h1>
+<button onclick="next(3)">Lanjut</button>
+</div>
 
-    <div id="gameArea" class="hidden">
-        <h3>Tangkap 5 Hati Ini Kalau Kamu Kangen Aku 💕</h3>
-        <p>Hati terkumpul: <span id="score">0</span>/5</p>
-    </div>
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<h1>Makasih sudah mau jadi Valentine aku 🥺💖</h1>
+<button onclick="next(4)">Buka Surat</button>
+</div>
 
-    <div id="finalMsg" class="hidden"></div>
+<!-- PAGE SURAT -->
+<div class="page" id="p4">
+<div class="letter">
+<h1>Be My Valentine 💗</h1>
+<p>
+Aku sayang kamu dan sangat beruntung punya kamu.  
+Segala doa terbaik untuk aku dan kamu.  
+
+Aku harap kita bisa selalu bercanda bersama,  
+tertawa tanpa alasan, dan terus saling mendukung.  
+
+Aku akan selalu mendukungmu dan menjadi support number 1 kamu.  
+
+Terima kasih sudah ada sampai saat ini sayangku.  
+Selamat Hari Valentine cantikku 💗
+</p>
+</div>
+<button onclick="confetti();next(5)">Terakhir 💕</button>
+</div>
+
+<!-- PAGE ROBLOX -->
+<div class="page" id="p5">
+<h1>Main Roblox bareng malam ini? 🎮💗</h1>
+<a href="https://wa.me/YOURNUMBER" target="_blank">
+<button>Chat Aku Sekarang 💕</button>
+</a>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-    noBtn.style.top = Math.random()*80+"vh";
-    noBtn.style.left = Math.random()*80+"vw";
-});
 
-function showLove(){
-    const msg = document.getElementById("loveMsg");
-    msg.style.display="block";
-    msg.innerHTML="Hehehe aku tau kok kamu sayang 😎❤️<br>Siap untuk tantangan kecil? 😆";
-    startGame();
+/* Sakura Loop */
+function sakura(){
+let s=document.createElement("div");
+s.className="sakura";
+s.innerHTML="🌸";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(Math.random()*5+5)+"s";
+document.body.appendChild(s);
+setTimeout(()=>{s.remove()},10000);
+}
+setInterval(sakura,300);
+
+/* Page */
+function next(n){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("p"+n).classList.add("active");
 }
 
-let score=0;
-
-function startGame(){
-    document.getElementById("gameArea").style.display="block";
-    spawnHeart();
+/* Music */
+function startMusic(){
+document.getElementById("bgm").play();
 }
 
-function spawnHeart(){
-    if(score>=5) return;
-    const heart=document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*90+"vw";
-    heart.style.top=Math.random()*80+"vh";
-    document.body.appendChild(heart);
-
-    heart.onclick=function(){
-        score++;
-        document.getElementById("score").innerText=score;
-        heart.remove();
-        if(score<5){
-            spawnHeart();
-        }else{
-            showFinal();
-        }
-    };
+/* Confetti */
+function confetti(){
+for(let i=0;i<60;i++){
+let c=document.createElement("div");
+c.className="confetti";
+c.innerHTML="💗";
+c.style.left=Math.random()*100+"vw";
+document.body.appendChild(c);
+setTimeout(()=>{c.remove()},3000);
+}
 }
 
-function showFinal(){
-    const final=document.getElementById("finalMsg");
-    final.style.display="block";
-    final.innerHTML=`
-    🥳 YEAYYY KAMU MENANG! 🥳<br><br>
-    Hadiahnya adalah...<br><br>
-    Aku 🫶<br><br>
-    Terima kasih sudah bertahan sejauh ini sama aku ❤️<br>
-    Walaupun jarak memisahkan kita,<br>
-    hatiku selalu pilih kamu.<br><br>
-    Aku kangen kamu.<br>
-    Aku bangga punya kamu.<br>
-    Dan aku nggak sabar ketemu kamu 🥰<br><br>
-    <b>Happy Valentine, cintaku.</b>
-    `;
-}
 </script>
 
 </body>
