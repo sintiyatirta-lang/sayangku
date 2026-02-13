@@ -5,223 +5,192 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Untuk Vivi ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
-    margin:0;
-    padding:0;
-    background:linear-gradient(135deg,#ffe6f2,#ffcce6);
-    font-family:'Poppins',sans-serif;
-    text-align:center;
-    overflow:hidden;
-    color:#c2185b;
+margin:0;
+padding:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#ffe6f2,#ffd1e8);
+overflow:hidden;
+color:#c2185b;
 }
 
-/* Countdown */
-.overlay{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:radial-gradient(circle,#fff,#ffb6d9);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:100;
-    animation:fadeOut 3s ease forwards;
-    animation-delay:5s;
+/* Page */
+.page{
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:25px;
+opacity:0;
+transform:translateX(30px);
+transition:all 0.8s ease;
 }
-.countdown{
-    font-size:80px;
-    font-weight:bold;
-    animation:pulse 1s infinite alternate;
+
+.page.active{
+opacity:1;
+transform:translateX(0);
 }
-@keyframes pulse{
-    from{transform:scale(1);}
-    to{transform:scale(1.3);}
+
+h1{
+font-family:'Playfair Display',serif;
 }
-@keyframes fadeOut{
-    to{opacity:0;visibility:hidden;}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff1493;
+color:white;
+font-size:16px;
+margin-top:20px;
+cursor:pointer;
+transition:0.3s;
+}
+button:hover{
+transform:scale(1.05);
 }
 
 /* Envelope */
 .envelope{
-    position:relative;
-    width:260px;
-    height:170px;
-    background:#ff4da6;
-    margin:30vh auto;
-    border-radius:10px;
-    cursor:pointer;
-    transition:0.5s;
+width:250px;
+height:160px;
+background:#ff4da6;
+border-radius:10px;
+position:relative;
+cursor:pointer;
 }
 .envelope:before{
-    content:"";
-    position:absolute;
-    top:-85px;
-    left:0;
-    border-left:130px solid transparent;
-    border-right:130px solid transparent;
-    border-bottom:85px solid #ff4da6;
-    transition:0.6s;
+content:"";
+position:absolute;
+top:-80px;
+left:0;
+border-left:125px solid transparent;
+border-right:125px solid transparent;
+border-bottom:80px solid #ff4da6;
+transition:0.6s ease;
 }
 .envelope.open:before{
-    transform:rotateX(180deg);
-    top:-15px;
+transform:rotateX(180deg);
+top:-15px;
 }
 
-/* Letter */
-.letter{
-    display:none;
-    padding:20px;
-    animation:fadeIn 2s ease forwards;
-}
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(20px);}
-    to{opacity:1;transform:translateY(0);}
-}
-
-h1{
-    font-family:'Playfair Display',serif;
-    font-size:2.5em;
-}
-
-button{
-    padding:12px 25px;
-    border:none;
-    border-radius:25px;
-    font-size:16px;
-    cursor:pointer;
-    margin:10px;
-}
-.yes{
-    background:#ff1493;
-    color:white;
-}
-.no{
-    background:#888;
-    color:white;
-    position:absolute;
-}
-
-/* Falling */
-.falling{
-    position:fixed;
-    top:-20px;
-    font-size:25px;
-    animation:fall linear infinite;
-}
-@keyframes fall{
-    to{transform:translateY(110vh);}
-}
-
-/* Ring animation */
-.ring{
-    font-size:60px;
-    animation:spin 2s linear infinite;
-}
-@keyframes spin{
-    from{transform:rotate(0);}
-    to{transform:rotate(360deg);}
-}
-
+/* Glow */
 .glow{
-    animation:glow 2s ease-in-out infinite alternate;
+animation:glow 2s ease-in-out infinite alternate;
 }
 @keyframes glow{
-    from{text-shadow:0 0 5px #ff69b4;}
-    to{text-shadow:0 0 20px #ff1493;}
+from{text-shadow:0 0 5px #ff69b4;}
+to{text-shadow:0 0 20px #ff1493;}
+}
+
+/* Falling icons */
+.falling{
+position:fixed;
+top:-20px;
+font-size:22px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh);
+opacity:0.8;
+}
 }
 </style>
 </head>
 <body>
 
-<div class="overlay">
-    <div>Hai Vivi ❤️</div>
-    <div class="countdown" id="count">5</div>
-    <div>Siap-siap yaa...</div>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+<h1>Hai Vivi ❤️</h1>
+<p>Aku punya sesuatu yang spesial buat kamu...</p>
+<button onclick="nextPage(2)">Lanjut 💕</button>
 </div>
 
+<!-- PAGE 2 -->
+<div class="page" id="page2">
 <div class="envelope" onclick="openEnvelope()" id="envelope"></div>
+<p>Klik amplopnya yaa 💌</p>
+</div>
 
-<div class="letter" id="letter">
-    <h1 class="glow">Untuk Vivi 🌸🍓🍒🌻</h1>
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+<h1>Untuk Vivi 🌸🍓</h1>
+<p>Kamu itu manis seperti strawberry 🍓</p>
+<p>Lucu seperti cherry 🍒</p>
+<p>Dan selalu cerah seperti bunga matahari 🌻</p>
+<button onclick="nextPage(4)">Masih ada lagi 😚</button>
+</div>
 
-    <p>Selamat Hari Valentine sayangkuu yang cantikk 💕</p>
-    <p>Aku sangat beruntung punya kamu.</p>
-    <p>Terimakasih banyak yaa uda sejauh ini mau bersamaku sayanggkuu.</p>
-    <p>I lovewe you so much ❤️</p>
-    <p>Selamat Hari Valentine 💖</p>
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+<h1>Terima Kasih ❤️</h1>
+<p>Terima kasih sudah sabar dan selalu ada.</p>
+<p>Kamu bikin hari-hariku jadi lebih hangat.</p>
+<button onclick="nextPage(5)">Lanjut 💖</button>
+</div>
 
-    <h2>Mau jadi Valentine aku selamanya? 😚</h2>
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+<h1>Aku Beruntung Punya Kamu 💕</h1>
+<p>Dari sekian banyak hal indah di dunia ini,</p>
+<p>kamu adalah yang paling aku syukuri.</p>
+<button onclick="nextPage(6)">Terakhir nih 😳</button>
+</div>
 
-    <button class="yes" onclick="accepted()">MAU 💖</button>
-    <button class="no" id="noBtn">ENGGAK 🙈</button>
+<!-- PAGE 6 (SURAT AKHIR) -->
+<div class="page" id="page6">
+<h1 class="glow">Selamat Hari Valentine, Sayanggkuu ❤️</h1>
 
-    <div id="final" style="display:none;">
-        <div class="ring">💍</div>
-        <h2 class="glow">Yeayyy Vivi pilih MAU ❤️</h2>
-        <p>Aku janji selalu jagain kamu 🌻</p>
-    </div>
+<p>Aku benar-benar bersyukur bisa punya kamu di hidupku.</p>
+<p>Dari sekian banyak hal indah di dunia ini, kamu adalah yang paling aku syukuri.</p>
+<br>
+<p>Terima kasih sudah mau berjalan sejauh ini bersamaku.</p>
+<p>Terima kasih atas sabarmu, perhatianmu, dan semua hal kecil yang selalu kamu lakukan tanpa aku minta.</p>
+<br>
+<p>Kamu itu manis seperti strawberry 🍓</p>
+<p>Lucu seperti cherry 🍒</p>
+<p>Dan selalu menerangi hariku seperti bunga matahari 🌻</p>
+<br>
+<p>Setiap hari bersamamu terasa lebih hangat, lebih tenang, dan lebih berarti.</p>
+<p>Aku merasa jadi orang paling beruntung karena punya kamu.</p>
+<br>
+<p>I love you so much, Vivi ❤️</p>
+<p>Selamat Hari Valentine, cintaku 💖</p>
+
 </div>
 
 <script>
-/* Countdown */
-let count=5;
-let counter=setInterval(()=>{
-    count--;
-    document.getElementById("count").innerText=count;
-    if(count===0){clearInterval(counter);}
-},1000);
+function nextPage(n){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+n).classList.add("active");
+}
 
-/* Open envelope */
 function openEnvelope(){
-    document.getElementById("envelope").classList.add("open");
-    setTimeout(()=>{
-        document.getElementById("envelope").style.display="none";
-        document.getElementById("letter").style.display="block";
-    },700);
+document.getElementById("envelope").classList.add("open");
+setTimeout(()=>{nextPage(3);},700);
 }
 
-/* No button kabur */
-const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",function(){
-    noBtn.style.top=Math.random()*window.innerHeight+"px";
-    noBtn.style.left=Math.random()*window.innerWidth+"px";
-});
-
-/* Yes clicked */
-function accepted(){
-    document.getElementById("final").style.display="block";
-    confetti();
+/* Smooth falling icons */
+function createFalling(){
+const icons=["❤️","🍓","🌻"];
+const el=document.createElement("div");
+el.classList.add("falling");
+el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+el.style.left=Math.random()*100+"vw";
+el.style.animationDuration=(Math.random()*4+4)+"s";
+document.body.appendChild(el);
+setTimeout(()=>{el.remove();},8000);
 }
-
-/* Falling items */
-function createItem(){
-    const items=["🍓","🍒","🌻","💖"];
-    const el=document.createElement("div");
-    el.classList.add("falling");
-    el.innerHTML=items[Math.floor(Math.random()*items.length)];
-    el.style.left=Math.random()*100+"vw";
-    el.style.animationDuration=Math.random()*3+3+"s";
-    document.body.appendChild(el);
-    setTimeout(()=>{el.remove();},6000);
-}
-setInterval(createItem,300);
-
-/* Simple confetti */
-function confetti(){
-    for(let i=0;i<50;i++){
-        let conf=document.createElement("div");
-        conf.classList.add("falling");
-        conf.innerHTML="💖";
-        conf.style.left=Math.random()*100+"vw";
-        conf.style.fontSize=Math.random()*20+10+"px";
-        conf.style.animationDuration=Math.random()*2+2+"s";
-        document.body.appendChild(conf);
-    }
-}
+setInterval(createFalling,800);
 </script>
 
 </body>
