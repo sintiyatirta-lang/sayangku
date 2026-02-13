@@ -2,195 +2,138 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Vivi ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<title>Valentine Untuk Kamu ❤️</title>
 <style>
 body{
-margin:0;
-padding:0;
-font-family:'Poppins',sans-serif;
-background:linear-gradient(135deg,#ffe6f2,#ffd1e8);
-overflow:hidden;
-color:#c2185b;
+    margin:0;
+    font-family:'Comic Sans MS', cursive;
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    text-align:center;
+    color:white;
+    overflow:hidden;
 }
-
-/* Page */
-.page{
-position:absolute;
-width:100%;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:25px;
-opacity:0;
-transform:translateX(30px);
-transition:all 0.8s ease;
+.container{
+    padding:40px;
 }
-
-.page.active{
-opacity:1;
-transform:translateX(0);
-}
-
 h1{
-font-family:'Playfair Display',serif;
+    font-size:38px;
+    animation:bounce 2s infinite;
 }
-
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+}
 button{
-padding:12px 25px;
-border:none;
-border-radius:25px;
-background:#ff1493;
-color:white;
-font-size:16px;
-margin-top:20px;
-cursor:pointer;
-transition:0.3s;
+    padding:15px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
 }
-button:hover{
-transform:scale(1.05);
+.yes{
+    background:white;
+    color:#ff4f81;
 }
-
-/* Envelope */
-.envelope{
-width:250px;
-height:160px;
-background:#ff4da6;
-border-radius:10px;
-position:relative;
-cursor:pointer;
+.no{
+    background:#ff4f81;
+    color:white;
+    position:absolute;
 }
-.envelope:before{
-content:"";
-position:absolute;
-top:-80px;
-left:0;
-border-left:125px solid transparent;
-border-right:125px solid transparent;
-border-bottom:80px solid #ff4da6;
-transition:0.6s ease;
+.hidden{
+    display:none;
+    margin-top:20px;
+    font-size:18px;
 }
-.envelope.open:before{
-transform:rotateX(180deg);
-top:-15px;
+#gameArea{
+    margin-top:20px;
 }
-
-/* Glow */
-.glow{
-animation:glow 2s ease-in-out infinite alternate;
-}
-@keyframes glow{
-from{text-shadow:0 0 5px #ff69b4;}
-to{text-shadow:0 0 20px #ff1493;}
-}
-
-/* Falling icons */
-.falling{
-position:fixed;
-top:-20px;
-font-size:22px;
-pointer-events:none;
-animation:fall linear forwards;
-}
-@keyframes fall{
-to{
-transform:translateY(110vh);
-opacity:0.8;
-}
+.heart{
+    position:absolute;
+    font-size:25px;
+    cursor:pointer;
 }
 </style>
 </head>
 <body>
 
-<!-- PAGE 1 -->
-<div class="page active" id="page1">
-<h1>Hai Vivi ❤️</h1>
-<p>Aku punya sesuatu yang spesial buat kamu...</p>
-<button onclick="nextPage(2)">Lanjut 💕</button>
-</div>
+<div class="container">
+    <h1>Happy Valentine Sayangku ❤️</h1>
+    <p>Walaupun kita LDR... kamu tetap milikku 😜</p>
 
-<!-- PAGE 2 -->
-<div class="page" id="page2">
-<div class="envelope" onclick="openEnvelope()" id="envelope"></div>
-<p>Klik amplopnya yaa 💌</p>
-</div>
+    <h3>Kamu sayang aku nggak? 👀</h3>
+    <button class="yes" onclick="showLove()">Sayang banget ❤️</button>
+    <button class="no" id="noBtn">Nggak 😝</button>
 
-<!-- PAGE 3 -->
-<div class="page" id="page3">
-<h1>Untuk Vivi 🌸🍓</h1>
-<p>Kamu itu manis seperti strawberry 🍓</p>
-<p>Lucu seperti cherry 🍒</p>
-<p>Dan selalu cerah seperti bunga matahari 🌻</p>
-<button onclick="nextPage(4)">Masih ada lagi 😚</button>
-</div>
+    <div id="loveMsg" class="hidden"></div>
 
-<!-- PAGE 4 -->
-<div class="page" id="page4">
-<h1>Terima Kasih ❤️</h1>
-<p>Terima kasih sudah sabar dan selalu ada.</p>
-<p>Kamu bikin hari-hariku jadi lebih hangat.</p>
-<button onclick="nextPage(5)">Lanjut 💖</button>
-</div>
+    <div id="gameArea" class="hidden">
+        <h3>Tangkap 5 Hati Ini Kalau Kamu Kangen Aku 💕</h3>
+        <p>Hati terkumpul: <span id="score">0</span>/5</p>
+    </div>
 
-<!-- PAGE 5 -->
-<div class="page" id="page5">
-<h1>Aku Beruntung Punya Kamu 💕</h1>
-<p>Dari sekian banyak hal indah di dunia ini,</p>
-<p>kamu adalah yang paling aku syukuri.</p>
-<button onclick="nextPage(6)">Terakhir nih 😳</button>
-</div>
-
-<!-- PAGE 6 (SURAT AKHIR) -->
-<div class="page" id="page6">
-<h1 class="glow">Selamat Hari Valentine, Sayanggkuu ❤️</h1>
-
-<p>Aku benar-benar bersyukur bisa punya kamu di hidupku.</p>
-<p>Dari sekian banyak hal indah di dunia ini, kamu adalah yang paling aku syukuri.</p>
-<br>
-<p>Terima kasih sudah mau berjalan sejauh ini bersamaku.</p>
-<p>Terima kasih atas sabarmu, perhatianmu, dan semua hal kecil yang selalu kamu lakukan tanpa aku minta.</p>
-<br>
-<p>Kamu itu manis seperti strawberry 🍓</p>
-<p>Lucu seperti cherry 🍒</p>
-<p>Dan selalu menerangi hariku seperti bunga matahari 🌻</p>
-<br>
-<p>Setiap hari bersamamu terasa lebih hangat, lebih tenang, dan lebih berarti.</p>
-<p>Aku merasa jadi orang paling beruntung karena punya kamu.</p>
-<br>
-<p>I love you so much, Vivi ❤️</p>
-<p>Selamat Hari Valentine, cintaku 💖</p>
-
+    <div id="finalMsg" class="hidden"></div>
 </div>
 
 <script>
-function nextPage(n){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById("page"+n).classList.add("active");
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.top = Math.random()*80+"vh";
+    noBtn.style.left = Math.random()*80+"vw";
+});
+
+function showLove(){
+    const msg = document.getElementById("loveMsg");
+    msg.style.display="block";
+    msg.innerHTML="Hehehe aku tau kok kamu sayang 😎❤️<br>Siap untuk tantangan kecil? 😆";
+    startGame();
 }
 
-function openEnvelope(){
-document.getElementById("envelope").classList.add("open");
-setTimeout(()=>{nextPage(3);},700);
+let score=0;
+
+function startGame(){
+    document.getElementById("gameArea").style.display="block";
+    spawnHeart();
 }
 
-/* Smooth falling icons */
-function createFalling(){
-const icons=["❤️","🍓","🌻"];
-const el=document.createElement("div");
-el.classList.add("falling");
-el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-el.style.left=Math.random()*100+"vw";
-el.style.animationDuration=(Math.random()*4+4)+"s";
-document.body.appendChild(el);
-setTimeout(()=>{el.remove();},8000);
+function spawnHeart(){
+    if(score>=5) return;
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*90+"vw";
+    heart.style.top=Math.random()*80+"vh";
+    document.body.appendChild(heart);
+
+    heart.onclick=function(){
+        score++;
+        document.getElementById("score").innerText=score;
+        heart.remove();
+        if(score<5){
+            spawnHeart();
+        }else{
+            showFinal();
+        }
+    };
 }
-setInterval(createFalling,800);
+
+function showFinal(){
+    const final=document.getElementById("finalMsg");
+    final.style.display="block";
+    final.innerHTML=`
+    🥳 YEAYYY KAMU MENANG! 🥳<br><br>
+    Hadiahnya adalah...<br><br>
+    Aku 🫶<br><br>
+    Terima kasih sudah bertahan sejauh ini sama aku ❤️<br>
+    Walaupun jarak memisahkan kita,<br>
+    hatiku selalu pilih kamu.<br><br>
+    Aku kangen kamu.<br>
+    Aku bangga punya kamu.<br>
+    Dan aku nggak sabar ketemu kamu 🥰<br><br>
+    <b>Happy Valentine, cintaku.</b>
+    `;
+}
 </script>
 
 </body>
